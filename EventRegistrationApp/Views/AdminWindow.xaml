@@ -1,0 +1,189 @@
+<Window x:Class="EventRegistrationApp.Views.AdminMainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Panel Administratora - System Rejestracji" Height="800" Width="1000"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#9C27B0" CornerRadius="0,0,10,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="20,0">
+                    <TextBlock x:Name="WelcomeText" FontSize="18" FontWeight="Bold" 
+                               Foreground="White"/>
+                    <TextBlock Text="Panel Administratora" FontSize="14" 
+                               Foreground="White" Opacity="0.8"/>
+                </StackPanel>
+                
+                <Button Grid.Column="1" x:Name="LogoutButton" Content="Wyloguj" 
+                        Background="#F44336" Foreground="White" 
+                        BorderThickness="0" Padding="20,10" Margin="20,0"
+                        FontWeight="Bold" Click="LogoutButton_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- Main Content -->
+        <TabControl Grid.Row="1" Margin="20" Background="White">
+            
+            <!-- Users Management Tab -->
+            <TabItem Header="Zarządzanie Użytkownikami" FontSize="14" FontWeight="Bold">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Zarządzanie użytkownikami" 
+                               FontSize="20" FontWeight="Bold" 
+                               Margin="0,0,0,20" Foreground="#333"/>
+
+                    <DataGrid Grid.Row="1" x:Name="UsersDataGrid" 
+                              AutoGenerateColumns="False" 
+                              AlternatingRowBackground="#F9F9F9"
+                              GridLinesVisibility="Horizontal"
+                              HeadersVisibility="Column"
+                              SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                            <DataGridTextColumn Header="Imię" Binding="{Binding FirstName}" Width="100"/>
+                            <DataGridTextColumn Header="Nazwisko" Binding="{Binding LastName}" Width="100"/>
+                            <DataGridTextColumn Header="Login" Binding="{Binding Login}" Width="100"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+                            <DataGridTextColumn Header="Uprawnienia" Binding="{Binding Permissions}" Width="100"/>
+                            <DataGridTextColumn Header="Data rejestracji" Binding="{Binding RegistrationDate}" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,20,0,0">
+                        <Button x:Name="AddUserButton" Content="Dodaj użytkownika" 
+                                Background="#4CAF50" Foreground="White" 
+                                Padding="15,8" Margin="0,0,10,0"
+                                Click="AddUserButton_Click"/>
+                        <Button x:Name="DeleteUserButton" Content="Usuń użytkownika" 
+                                Background="#F44336" Foreground="White" 
+                                Padding="15,8" Margin="0,0,10,0"
+                                Click="DeleteUserButton_Click"/>
+                        <Button x:Name="ResetPasswordButton" Content="Resetuj hasło" 
+                                Background="#FF9800" Foreground="White" 
+                                Padding="15,8" Margin="0,0,10,0"
+                                Click="ResetPasswordButton_Click"/>
+                        <Button x:Name="RefreshUsersButton" Content="Odśwież" 
+                                Background="#2196F3" Foreground="White" 
+                                Padding="15,8"
+                                Click="RefreshUsersButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Events Management Tab -->
+            <TabItem Header="Zarządzanie Wydarzeniami" FontSize="14" FontWeight="Bold">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Zarządzanie wydarzeniami" 
+                               FontSize="20" FontWeight="Bold" 
+                               Margin="0,0,0,20" Foreground="#333"/>
+
+                    <DataGrid Grid.Row="1" x:Name="EventsDataGrid" 
+                              AutoGenerateColumns="False" 
+                              AlternatingRowBackground="#F9F9F9"
+                              GridLinesVisibility="Horizontal"
+                              HeadersVisibility="Column"
+                              SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                            <DataGridTextColumn Header="Nazwa" Binding="{Binding Name}" Width="200"/>
+                            <DataGridTextColumn Header="Agenda" Binding="{Binding Agenda}" Width="300"/>
+                            <DataGridTextColumn Header="Data wydarzenia" Binding="{Binding EventDate}" Width="150"/>
+                            <DataGridCheckBoxColumn Header="Aktywne" Binding="{Binding IsActive}" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,20,0,0">
+                        <Button x:Name="AddEventButton" Content="Dodaj wydarzenie" 
+                                Background="#4CAF50" Foreground="White" 
+                                Padding="15,8" Margin="0,0,10,0"
+                                Click="AddEventButton_Click"/>
+                        <Button x:Name="EditEventButton" Content="Edytuj wydarzenie" 
+                                Background="#FF9800" Foreground="White" 
+                                Padding="15,8" Margin="0,0,10,0"
+                                Click="EditEventButton_Click"/>
+                        <Button x:Name="DeleteEventButton" Content="Usuń wydarzenie" 
+                                Background="#F44336" Foreground="White" 
+                                Padding="15,8" Margin="0,0,10,0"
+                                Click="DeleteEventButton_Click"/>
+                        <Button x:Name="RefreshEventsButton" Content="Odśwież" 
+                                Background="#2196F3" Foreground="White" 
+                                Padding="15,8"
+                                Click="RefreshEventsButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <!-- Registrations Management Tab -->
+            <TabItem Header="Zarządzanie Zapisami" FontSize="14" FontWeight="Bold">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Zarządzanie zapisami na wydarzenia" 
+                               FontSize="20" FontWeight="Bold" 
+                               Margin="0,0,0,20" Foreground="#333"/>
+
+                    <DataGrid Grid.Row="1" x:Name="RegistrationsDataGrid" 
+                              AutoGenerateColumns="False" 
+                              AlternatingRowBackground="#F9F9F9"
+                              GridLinesVisibility="Horizontal"
+                              HeadersVisibility="Column"
+                              SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                            <DataGridTextColumn Header="Użytkownik" Width="150"/>
+                            <DataGridTextColumn Header="Wydarzenie" Width="200"/>
+                            <DataGridTextColumn Header="Typ uczestnictwa" Binding="{Binding ParticipationType}" Width="120"/>
+                            <DataGridTextColumn Header="Preferencje żywieniowe" Binding="{Binding FoodPreference}" Width="150"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,20,0,0">
+                        <Button x:Name="ConfirmRegistrationButton" Content="Potwierdź zapis" 
+                                Background="#4CAF50" Foreground="White" 
+                                Padding="15,8" Margin="0,0,10,0"
+                                Click="ConfirmRegistrationButton_Click"/>
+                        <Button x:Name="RejectRegistrationButton" Content="Odrzuć zapis" 
+                                Background="#F44336" Foreground="White" 
+                                Padding="15,8" Margin="0,0,10,0"
+                                Click="RejectRegistrationButton_Click"/>
+                        <Button x:Name="RefreshRegistrationsButton" Content="Odśwież" 
+                                Background="#2196F3" Foreground="White" 
+                                Padding="15,8"
+                                Click="RefreshRegistrationsButton_Click"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        
+        
+    </Grid>
+</Window>
