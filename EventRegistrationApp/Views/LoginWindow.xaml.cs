@@ -1,4 +1,3 @@
-// Views/LoginWindow.xaml.cs - Naprawiona wersja
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
