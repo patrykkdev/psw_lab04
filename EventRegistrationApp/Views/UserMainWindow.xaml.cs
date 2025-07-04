@@ -73,13 +73,12 @@ namespace EventRegistrationApp.Views
                 }
                 else
                 {
-                    // jesli brak polaczenia z baza - zaladuj dane testowe
                     LoadTestEvents();
                 }
             }
             catch (Exception ex)
             {
-                // w przypadku bledu - zaladuj dane testowe
+         
                 RegistrationMessage.Text = $"blad bazy danych: {ex.Message} - uzywam danych testowych";
                 RegistrationMessage.Foreground = System.Windows.Media.Brushes.Orange;
                 LoadTestEvents();
@@ -220,8 +219,6 @@ namespace EventRegistrationApp.Views
                 }
                 else
                 {
-                    // jesli brak w bazie - sprawdz czy sa dane testowe
-                    // (w rzeczywistej aplikacji to nie bedzie potrzebne)
                     if (availableEvents != null && availableEvents.Count > 0)
                     {
                         // mozna dodac przykladowe zgloszenie testowe
@@ -339,8 +336,6 @@ namespace EventRegistrationApp.Views
 
                 // resetowanie formularza
                 ResetForm();
-                
-                // wazne: przeladowanie zgloszen po rejestracji
                 LoadMyRegistrations();
                 
             }
@@ -391,7 +386,6 @@ namespace EventRegistrationApp.Views
             }
             catch
             {
-                // ignoruj bledy resetowania
             }
         }
 
