@@ -1,4 +1,3 @@
-// services/databaseService.cs - kompletny kod
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,8 +12,6 @@ namespace EventRegistrationApp.Services
 
         public DatabaseService()
         {
-            // konfiguracja polaczenia z baza danych mysql
-            // zmien haslo na swoje prawdziwe haslo root
             connectionString = "Server=localhost;Port=3306;Database=event_registration;Uid=root;Pwd=admin;";
         }
 
